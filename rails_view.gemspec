@@ -6,14 +6,14 @@ Gem::Specification::new do |spec|
   spec.version = "1.0.0"
   spec.platform = Gem::Platform::RUBY
   spec.summary = "rails_view"
-  spec.description = "View.render(:template => 'shared/view')"
+  spec.description = "View.render(:template => 'shared/view', :locals => {:key => :val})"
 
   spec.files =
 ["README.md",
  "Rakefile",
  "lib",
- "lib/rails_current.rb",
  "lib/rails_view.rb",
+ "rails_view.gemspec",
  "test",
  "test/rails_view_test.rb",
  "test/testing.rb"]
