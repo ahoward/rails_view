@@ -3,7 +3,7 @@
 
 Gem::Specification::new do |spec|
   spec.name = "rails_view"
-  spec.version = "1.0.0"
+  spec.version = "1.2.0"
   spec.platform = Gem::Platform::RUBY
   spec.summary = "rails_view"
   spec.description = "View.render(:template => 'shared/view', :locals => {:key => :val})"
