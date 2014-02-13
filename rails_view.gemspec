@@ -6,7 +6,7 @@ Gem::Specification::new do |spec|
   spec.version = "2.0.0"
   spec.platform = Gem::Platform::RUBY
   spec.summary = "rails_view"
-  spec.description = "description: rails_view kicks the ass"
+  spec.description = "render views from anywhere. even without a controller context"
   spec.license = "same as ruby's"
 
   spec.files =
