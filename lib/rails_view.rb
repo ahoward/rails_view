@@ -2,7 +2,7 @@ require 'rails' unless defined?(::Rails)
 require 'action_controller' unless defined?(::ActionController)
 
 class View
-  VERSION = '2.0.0'
+  VERSION = '2.1.0'
 
   def View.version
     View::VERSION
@@ -30,36 +30,43 @@ class View
     )
   end
 
-  def View.controller(&block)
-    load_shit!
-
-    controller_class = Class.new(::ActionController::Base) do
-      layout false
-      helper :all
+  if defined?(::Rails_current) && defined?(::Current)
+    def View.controller(&block)
+      controller = ::Current.controller || ::Current.mock_controller
+      block ? controller.instance_eval(&block) : controller
     end
+  else
+    def View.controller(&block)
+      load_shit!
 
-    default_url_options =
-      begin
-        require 'rails_default_url_options'
-        DefaultUrlOptions
-      rescue LoadError
-        options[:default_url_options] || {}
+      controller_class = Class.new(::ActionController::Base) do
+        layout false
+        helper :all
       end
 
-    store = ActiveSupport::Cache::MemoryStore.new 
-    request = ActionDispatch::TestRequest.new 
-    response = ActionDispatch::TestResponse.new 
+      default_url_options =
+        begin
+          require 'rails_default_url_options'
+          DefaultUrlOptions
+        rescue LoadError
+          options[:default_url_options] || {}
+        end
 
-    controller = controller_class.new()
+      store = ActiveSupport::Cache::MemoryStore.new 
+      request = ActionDispatch::TestRequest.new 
+      response = ActionDispatch::TestResponse.new 
 
-    controller.perform_caching = false
-    controller.cache_store = store 
-    controller.request = request 
-    controller.response = response 
-    #controller.send(:initialize_template_class, response) 
-    #controller.send(:assign_shortcuts, request, response) 
-    controller.send(:default_url_options).merge!(default_url_options)
-    block ? controller.instance_eval(&block) : controller
+      controller = controller_class.new()
+
+      controller.perform_caching = false
+      controller.cache_store = store 
+      controller.request = request 
+      controller.response = response 
+      #controller.send(:initialize_template_class, response) 
+      #controller.send(:assign_shortcuts, request, response) 
+      controller.send(:default_url_options).merge!(default_url_options)
+      block ? controller.instance_eval(&block) : controller
+    end
   end
 
   def View.render(*args)
