@@ -2,7 +2,7 @@ require 'rails' unless defined?(::Rails)
 require 'action_controller' unless defined?(::ActionController)
 
 class View
-  VERSION = '2.1.0'
+  VERSION = '2.2.0'
 
   def View.version
     View::VERSION
@@ -32,7 +32,7 @@ class View
 
   if defined?(::Rails_current) && defined?(::Current)
     def View.controller(&block)
-      controller = ::Current.controller || ::Current.mock_controller
+      controller = ::Current.controller ? ::Current.controller.dup : ::Current.mock_controller
       block ? controller.instance_eval(&block) : controller
     end
   else
