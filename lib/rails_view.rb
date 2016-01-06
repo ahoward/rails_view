@@ -2,7 +2,7 @@ require 'rails' unless defined?(::Rails)
 require 'action_controller' unless defined?(::ActionController)
 
 class View
-  VERSION = '2.2.0'
+  VERSION = '2.3.0'
 
   def View.version
     View::VERSION
@@ -70,6 +70,13 @@ class View
   end
 
   def View.render(*args)
+    options = args.extract_options!.to_options!
+    args.push(options)
+
+    unless options.has_key?(:layout)
+      options[:layout] = false
+    end
+
     Array(View.controller{ render(*args) }).join.html_safe
   end
 end
