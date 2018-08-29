@@ -3,7 +3,7 @@
 
 Gem::Specification::new do |spec|
   spec.name = "rails_view"
-  spec.version = "3.1.0"
+  spec.version = "3.2.0"
   spec.platform = Gem::Platform::RUBY
   spec.summary = "rails_view"
   spec.description = "description: rails_view kicks the ass"
@@ -16,6 +16,7 @@ Gem::Specification::new do |spec|
  "lib/rails_view",
  "lib/rails_view.rb",
  "lib/rails_view/_lib.rb",
+ "rails_view.gemspec",
  "test",
  "test/rails_view_test.rb",
  "test/testing.rb"]

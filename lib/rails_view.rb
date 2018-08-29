@@ -1,6 +1,6 @@
 
 class View
-  require_relative '../_lib.rb'
+  require_relative './rails_view/_lib.rb'
 
   begin
     require 'rubygems'
