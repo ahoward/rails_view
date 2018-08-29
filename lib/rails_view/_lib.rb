@@ -1,5 +1,5 @@
 class View
-  VERSION = '3.0.0'
+  VERSION = '3.1.0'
 
   def View.version
     View::VERSION
@@ -7,7 +7,7 @@ class View
 
   def View.dependencies
     {
-      'rails_current' => [ 'rails_current'    , '~> 1' ]
+      'rails_current' => [ 'rails_current'    , '~> 2' ]
     }
   end
 end
